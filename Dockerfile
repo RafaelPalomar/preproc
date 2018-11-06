@@ -12,10 +12,11 @@ RUN apt install libinsighttoolkit4-dev \
 		build-essential -y
 
 RUN mkdir /src
-RUN  git clone https://github.com/RafaelPalomar/preproc /src/preproc
+ADD https://api.github.com/repos/RafaelPalomar/preproc/git/refs/heads/master version.json
+RUN  git clone -b master https://github.com/RafaelPalomar/preproc /src/prepro
 
 RUN mkdir /build
 WORKDIR /build
 
-RUN cmake ../src/preproc
-make
+RUN cmake ../src/prepro
+RUN make

@@ -3,7 +3,7 @@
 #include <itkExtractImageFilter.h>
 #include <itkImageFileWriter.h>
 
-int main(int argc char *[]){
+int main(int argc, char *[]){
 
 
   return 0;
