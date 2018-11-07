@@ -9,6 +9,7 @@ RUN apt update
 RUN apt install libinsighttoolkit4-dev \
     		cmake \
 		git \
+		libtclap-dev \
 		build-essential -y
 
 RUN mkdir /src
