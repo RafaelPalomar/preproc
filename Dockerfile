@@ -21,3 +21,9 @@ WORKDIR /build
 
 RUN cmake ../src/preproc/source
 RUN make
+
+ENV EXECUTABLE=/build/preproc
+ENV INPUT_DATA_DIR=/input_data
+ENV OUTPUT_DATA_DIR=/output_data
+
+CMD ["/src/preproc/scripts/run.sh"]

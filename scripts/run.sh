@@ -22,6 +22,7 @@ fi
 
 INPUT_FILES=$(find ${INPUT_DATA_DIR} -type f)
 
+# Define the execution function
 doit(){
     ${EXECUTABLE} -i $1 -o ${OUTPUT_DATA_DIR}/$(basename $1)
 }
