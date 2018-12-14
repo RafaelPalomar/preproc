@@ -12,18 +12,21 @@ RUN apt install libinsighttoolkit4-dev \
 		libtclap-dev \
 		build-essential -y
 
-RUN mkdir /src
-ADD https://api.github.com/repos/RafaelPalomar/preproc/git/refs/heads/master version.json
-RUN  git clone -b master https://github.com/RafaelPalomar/preproc /src/preproc
+RUN apt install parallel -y
+
+ADD ./source /source
 
 RUN mkdir /build
 WORKDIR /build
 
-RUN cmake ../src/preproc/source
+RUN cmake ../source
 RUN make
+
+ADD ./scripts /scripts
+
 
 ENV EXECUTABLE=/build/preproc
 ENV INPUT_DATA_DIR=/input_data
 ENV OUTPUT_DATA_DIR=/output_data
 
-CMD ["/src/preproc/scripts/run.sh"]
+CMD ["/scripts/run.sh"]
