@@ -21,6 +21,7 @@ typedef struct InputArguments {
 
   std::string inputFile;
   std::string outputBase;
+  std::string outputFileFormat;
   unsigned int size;
   bool labelMap;
   bool flipx;
@@ -72,6 +73,7 @@ int ParseCommandLineArguments(int argc, char **argv, INPUTARGUMENTS &arguments )
 
   TCLAP::ValueArg<std::string> inputImage ("i", "input", "Input file", true,"", "string");
   TCLAP::ValueArg<std::string> outputBaseName ("o", "output", "Input file basename", true,"", "string");
+  TCLAP::ValueArg<std::string> outputFileFormat ("f", "file", "Output file format", true,"", "string");
   TCLAP::ValueArg<unsigned int> size ("s", "size", "Output size", false, 0,"integer");
   TCLAP::SwitchArg labelMap ("l", "labelmap", "Is the input file a labelmap?", false);
   TCLAP::SwitchArg flipX ("x", "flipx", "Flip the results (X axis)", false);
@@ -79,6 +81,7 @@ int ParseCommandLineArguments(int argc, char **argv, INPUTARGUMENTS &arguments )
 
   cmd.add(inputImage);
   cmd.add(outputBaseName);
+  cmd.add(outputFileFormat);
   cmd.add(size);
   cmd.add(labelMap);
   cmd.add(flipX);
@@ -88,6 +91,7 @@ int ParseCommandLineArguments(int argc, char **argv, INPUTARGUMENTS &arguments )
 
   arguments.inputFile = inputImage.getValue();
   arguments.outputBase = outputBaseName.getValue();
+  arguments.outputFileFormat = outputFileFormat.getValue();
   arguments.labelMap = labelMap.getValue();
   arguments.size = size.getValue();
   arguments.flipx = flipX.getValue();
@@ -222,7 +226,8 @@ int ProcessImage(INPUTARGUMENTS &arguments)
     std::stringstream outputName;
     outputName << arguments.outputBase << "/"
                << std::setfill('0')
-               << std::setw(4) << i << ".nrrd";
+               << std::setw(4) << i
+               << "." << arguments.outputFileFormat;
     outputWriter->SetFileName(outputName.str());
 
     outputWriter->SetInput(flip->GetOutput());

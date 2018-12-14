@@ -38,8 +38,8 @@ fi
 doit(){
     mkdir -p ${OUTPUT_DATA_DIR}/$(basename $1)
 
-    echo ${EXECUTABLE} -i $1 -o ${OUTPUT_DATA_DIR}/$(basename $1) -s ${SIZE:-0} ${flipx} ${flipy}
-    ${EXECUTABLE} -i $1 -o ${OUTPUT_DATA_DIR}/$(basename $1) -s ${SIZE:-0} ${flipx} ${flipy}
+    echo ${EXECUTABLE} -i $1 -o ${OUTPUT_DATA_DIR}/$(basename $1) -s ${SIZE:-0} ${flipx} ${flipy} -f ${FORMAT:-"nrrd"}
+    ${EXECUTABLE} -i $1 -o ${OUTPUT_DATA_DIR}/$(basename $1) -s ${SIZE:-0} ${flipx} ${flipy} -f ${FORMAT:-"nrrd"}
 }
 
 export -f doit
